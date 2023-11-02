@@ -38,7 +38,9 @@ public class NejikoController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        Debug.Log("Sasaki");
+
+        Debug.Log("TRY-TEST TEST TEST TEST");
+
     }
 
     void Update()
