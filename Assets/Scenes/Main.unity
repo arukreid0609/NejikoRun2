@@ -260,7 +260,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 46857006}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 704643218}
+        m_TargetAssemblyTypeName: NejikoController, Assembly-CSharp
+        m_MethodName: MoveToLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &46857006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +802,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 614393637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 704643218}
+        m_TargetAssemblyTypeName: NejikoController, Assembly-CSharp
+        m_MethodName: MoveToRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &614393637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1818,7 +1842,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1470363572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 704643218}
+        m_TargetAssemblyTypeName: NejikoController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1470363572
 MonoBehaviour:
   m_ObjectHideFlags: 0
