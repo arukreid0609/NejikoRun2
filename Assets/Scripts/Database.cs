@@ -25,7 +25,7 @@ public class Database : MonoBehaviour
 
     IEnumerator GetRanking()
     {
-        string url = "http://localhost/webapi/webapi.py";
+        string url = "http://localhost/nejikorun/sendscore.py";
         WWWForm form = new WWWForm();
 
         form.AddField("name", "nejiko");
@@ -41,10 +41,11 @@ public class Database : MonoBehaviour
             else
             {
                 string responseText = uwr.downloadHandler.text;
-                Result result = JsonUtility.FromJson<Result>(responseText);
-                Debug.Log(result.result[0].name);
-                Debug.Log(result.result[0].id);
-                Debug.Log(result.result[0].record);
+                Debug.Log(responseText);
+                // Result result = JsonUtility.FromJson<Result>(responseText);
+                // Debug.Log(result.result[0].name);
+                // Debug.Log(result.result[0].id);
+                // Debug.Log(result.result[0].record);
                 // Debug.Log("Response: " + responseText);
             }
         }
