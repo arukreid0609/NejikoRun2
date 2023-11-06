@@ -73,6 +73,5 @@ public class StageGenerator : MonoBehaviour
         GameObject oldStage = generatedStageList[0];
         generatedStageList.RemoveAt(0);
         Destroy(oldStage);
-        // Destroy(oldStage);
     }
 }
