@@ -14,7 +14,7 @@ public class Database : MonoBehaviour
         {
             public int id;
             public string name;
-            public int record;
+            public int score;
 
         }
     }
@@ -42,11 +42,11 @@ public class Database : MonoBehaviour
             {
                 string responseText = uwr.downloadHandler.text;
                 Debug.Log(responseText);
-                // Result result = JsonUtility.FromJson<Result>(responseText);
-                // Debug.Log(result.result[0].name);
-                // Debug.Log(result.result[0].id);
-                // Debug.Log(result.result[0].record);
-                // Debug.Log("Response: " + responseText);
+                Result result = JsonUtility.FromJson<Result>(responseText);
+                Debug.Log(result.result[0].name);
+                Debug.Log(result.result[0].id);
+                Debug.Log(result.result[0].score);
+                Debug.Log("Response: " + responseText);
             }
         }
     }
