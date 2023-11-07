@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 676241555}
   - component: {fileID: 676241554}
   m_Layer: 0
-  m_Name: Database
+  m_Name: GetRanking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89184cbada8f17c4eae1bde096c57bd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  users: []
 --- !u!4 &676241555
 Transform:
   m_ObjectHideFlags: 0
