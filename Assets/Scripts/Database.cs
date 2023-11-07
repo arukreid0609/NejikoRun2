@@ -5,19 +5,8 @@ using UnityEngine.Networking;
 
 public class Database : MonoBehaviour
 {
-    [Serializable]
-    public class Result
-    {
-        public User[] result;
-        [Serializable]
-        public class User
-        {
-            public int id;
-            public string name;
-            public int score;
+    public User[] users;
 
-        }
-    }
     private void Start()
     {
         StartCoroutine(GetRanking());
@@ -43,11 +32,22 @@ public class Database : MonoBehaviour
                 string responseText = uwr.downloadHandler.text;
                 Debug.Log(responseText);
                 Result result = JsonUtility.FromJson<Result>(responseText);
-                Debug.Log(result.result[0].name);
-                Debug.Log(result.result[0].id);
-                Debug.Log(result.result[0].score);
-                Debug.Log("Response: " + responseText);
+                users = result.result;
             }
         }
     }
+}
+
+[Serializable]
+public class Result
+{
+    public User[] result;
+}
+[Serializable]
+public class User
+{
+    public int id;
+    public string name;
+    public int score;
+
 }
