@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class TitleController : MonoBehaviour
 {
     public Text highScoreText;
+    public GameObject canvas;
+    public GameObject sendRankingCanvas;
 
     public void Start()
     {
