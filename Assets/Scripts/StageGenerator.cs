@@ -19,6 +19,7 @@ public class StageGenerator : MonoBehaviour
     {
         currentChipIndex = startChipIndex - 1;
         UpdateStage(preInstantiate);
+
     }
 
     // Update is called once per frame
