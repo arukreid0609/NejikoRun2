@@ -23,6 +23,7 @@ public class NejikoController : MonoBehaviour
     public float speedX;
     public float speedJump;
     public float accelerationZ;
+    public Transform target;
 
     public int Life()
     {
@@ -45,6 +46,7 @@ public class NejikoController : MonoBehaviour
 
     void Update()
     {
+        this.transform.LookAt(target);
         // デバッグ用
         if (Input.GetKeyDown("left")) MoveToLeft();
         if (Input.GetKeyDown("right")) MoveToRight();
