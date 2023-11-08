@@ -108,6 +108,19 @@ public class NejikoController : MonoBehaviour
         }
     }
 
+    public void JumpSpeedUp()
+    {
+        StartCoroutine(ResetJumpSpeed(speedJump));
+        this.speedJump *= 2.0f;
+    }
+
+    IEnumerator ResetJumpSpeed(float speedJump)
+    {
+        yield return new WaitForSeconds(2.0f);
+        this.speedJump = speedJump;
+    }
+
+
     // CharcterControllerに衝突判定が生じたときの処理
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -124,13 +137,13 @@ public class NejikoController : MonoBehaviour
 
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
-            //
         }
         else if (hit.gameObject.tag == "Item")
         {
             // アイテムを使用する
             IItemUseHandler item = hit.gameObject.GetComponent<IItemUseHandler>();
             item.useItem();
+            Destroy(hit.gameObject);
         }
     }
 }

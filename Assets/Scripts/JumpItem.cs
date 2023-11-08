@@ -1,15 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class HealItem : MonoBehaviour, IItemUseHandler
+public class JumpItem : MonoBehaviour, IItemUseHandler
 {
     NejikoController target;
-    private void Start()
+
+    void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<NejikoController>();
     }
     public void useItem()
     {
-        target.RecoverLife();
+        target.JumpSpeedUp();
     }
 }

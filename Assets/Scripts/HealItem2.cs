@@ -1,15 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class HealItem : MonoBehaviour, IItemUseHandler
+public class HealItem2 : MonoBehaviour, IItemUseHandler
 {
-    NejikoController target;
-    private void Start()
+    public NejikoController target;
+    void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<NejikoController>();
     }
     public void useItem()
     {
         target.RecoverLife();
+        Destroy(this.gameObject);
     }
+
 }
