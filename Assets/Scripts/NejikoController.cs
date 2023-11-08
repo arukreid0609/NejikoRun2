@@ -23,11 +23,14 @@ public class NejikoController : MonoBehaviour
     public float speedX;
     public float speedJump;
     public float accelerationZ;
-    public Transform target;
 
     public int Life()
     {
         return life;
+    }
+    public void RecoverLife()
+    {
+        if (life < DefaultLife) life++;
     }
 
     bool IsStun()
@@ -39,14 +42,10 @@ public class NejikoController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-
-        Debug.Log("TRY-TEST TEST TEST TEST");
-
     }
 
     void Update()
     {
-        this.transform.LookAt(target);
         // デバッグ用
         if (Input.GetKeyDown("left")) MoveToLeft();
         if (Input.GetKeyDown("right")) MoveToRight();
@@ -126,6 +125,12 @@ public class NejikoController : MonoBehaviour
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
             //
+        }
+        else if (hit.gameObject.tag == "Item")
+        {
+            // アイテムを使用する
+            IItemUseHandler item = hit.gameObject.GetComponent<IItemUseHandler>();
+            item.useItem();
         }
     }
 }

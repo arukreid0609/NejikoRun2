@@ -1,0 +1,4 @@
+interface IItemUseHandler
+{
+    void useItem();
+}
