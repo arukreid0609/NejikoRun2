@@ -948,6 +948,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 256464910, guid: a780da896ca904035b33f90d86b0ba4d, type: 3}
+      propertyPath: speedJump
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5817771194488945085, guid: a780da896ca904035b33f90d86b0ba4d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1016,7 +1020,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256464908}
-  m_Material: {fileID: 13400000, guid: c95f940eaf28d714b983714de922a718, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NejikoController : MonoBehaviour
@@ -74,21 +75,22 @@ public class NejikoController : MonoBehaviour
 
         // 移動実行
         // Vector3 globalDirection = transform.TransformDirection(moveDirection);
+        // moveDirection = globalDirection;
         // controller.Move(globalDirection * Time.deltaTime);
         // rd.velocity = moveDirection;
 
 
         // 移動後接地してたらY方向の速度はリセットする
         // if (controller.isGrounded) moveDirection.y = 0;
-        // if (isGrounded) moveDirection.y = 0;
+        if (isGrounded) moveDirection.y = 0;
 
         // 速度が0以上なら走っているフラグをtrueにする
         animator.SetBool("run", moveDirection.z > 0.0f);
     }
     private void FixedUpdate()
     {
-        // rd.velocity = moveDirection;
-        rd.AddForce(moveDirection);
+        rd.velocity = moveDirection;
+        // rd.AddForce(transform.forward * speedZ, ForceMode.Acceleration);
     }
 
     // 左のレーンに移動を開始
@@ -113,6 +115,8 @@ public class NejikoController : MonoBehaviour
         if (isGrounded)
         {
             moveDirection.y = speedJump;
+            // rd.AddForce(transform.up * speedJump, ForceMode.VelocityChange);
+            isGrounded = false;
 
             // ジャンプトリガーを設定
             animator.SetTrigger("jump");
@@ -142,7 +146,11 @@ public class NejikoController : MonoBehaviour
     {
         if (IsStun()) return;
 
-        // if (other.gameObject.tag == "Ground") isGrounded = true;
+        if (other.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+            // rd.useGravity = false;
+        }
         if (other.gameObject.tag == "Robo")
         {
             // ライフを減らして気絶状態に移行
@@ -159,7 +167,10 @@ public class NejikoController : MonoBehaviour
     }
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Ground") isGrounded = false;
+        if (other.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+        }
     }
     void OnCollisionStay(Collision other)
     {
