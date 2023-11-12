@@ -14,13 +14,22 @@ public class SimpleFollow : MonoBehaviour
         diff = target.transform.position - transform.position;
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
         transform.position = Vector3.Lerp(
             transform.position,
             target.transform.position - diff,
             Time.deltaTime * followSpeed
         );
+
+    }
+    void LateUpdate()
+    {
+        // transform.position = Vector3.Lerp(
+        //     transform.position,
+        //     target.transform.position - diff,
+        //     Time.deltaTime * followSpeed
+        // );
     }
     // Update is called once per frame
     void Update()
