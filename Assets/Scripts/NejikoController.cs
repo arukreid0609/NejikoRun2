@@ -11,6 +11,9 @@ public class NejikoController : MonoBehaviour
     const float StunDuration = 0.5f;
 
     CharacterController controller;
+    Rigidbody rd;
+    bool isGrounded = true;
+    CapsuleCollider col;
     Animator animator;
 
     Vector3 moveDirection = Vector3.zero;
@@ -36,11 +39,10 @@ public class NejikoController : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        // controller = GetComponent<CharacterController>();
+        rd = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
         animator = GetComponent<Animator>();
-
-        Debug.Log("TRY-TEST TEST TEST TEST");
-
     }
 
     void Update()
@@ -71,34 +73,44 @@ public class NejikoController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         // 移動実行
-        Vector3 globalDirection = transform.TransformDirection(moveDirection);
-        controller.Move(globalDirection * Time.deltaTime);
+        // Vector3 globalDirection = transform.TransformDirection(moveDirection);
+        // controller.Move(globalDirection * Time.deltaTime);
+        // rd.velocity = moveDirection;
 
 
         // 移動後接地してたらY方向の速度はリセットする
-        if (controller.isGrounded) moveDirection.y = 0;
+        // if (controller.isGrounded) moveDirection.y = 0;
+        // if (isGrounded) moveDirection.y = 0;
 
         // 速度が0以上なら走っているフラグをtrueにする
         animator.SetBool("run", moveDirection.z > 0.0f);
+    }
+    private void FixedUpdate()
+    {
+        // rd.velocity = moveDirection;
+        rd.AddForce(moveDirection);
     }
 
     // 左のレーンに移動を開始
     public void MoveToLeft()
     {
         if (IsStun()) return;
-        if (controller.isGrounded && targetLane > MinLane) targetLane--;
+        // if (controller.isGrounded && targetLane > MinLane) targetLane--;
+        if (isGrounded && targetLane > MinLane) targetLane--;
     }
     public void MoveToRight()
     {
         if (IsStun()) return;
-        if (controller.isGrounded && targetLane < MaxLane) targetLane++;
+        // if (controller.isGrounded && targetLane < MaxLane) targetLane++;
+        if (isGrounded && targetLane < MaxLane) targetLane++;
 
     }
 
     public void Jump()
     {
         if (IsStun()) return;
-        if (controller.isGrounded)
+        // if (controller.isGrounded)
+        if (isGrounded)
         {
             moveDirection.y = speedJump;
 
@@ -108,11 +120,30 @@ public class NejikoController : MonoBehaviour
     }
 
     // CharcterControllerに衝突判定が生じたときの処理
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    // void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     if (IsStun()) return;
+
+    //     if (hit.gameObject.tag == "Robo")
+    //     {
+    //         // ライフを減らして気絶状態に移行
+    //         life--;
+    //         recoverTime = StunDuration;
+
+    //         // ダメージトリガーを設定
+    //         animator.SetTrigger("damage");
+
+    //         // ヒットしたオブジェクトは削除
+    //         Destroy(hit.gameObject);
+    //         //
+    //     }
+    // }
+    void OnCollisionEnter(Collision other)
     {
         if (IsStun()) return;
 
-        if (hit.gameObject.tag == "Robo")
+        // if (other.gameObject.tag == "Ground") isGrounded = true;
+        if (other.gameObject.tag == "Robo")
         {
             // ライフを減らして気絶状態に移行
             life--;
@@ -122,8 +153,20 @@ public class NejikoController : MonoBehaviour
             animator.SetTrigger("damage");
 
             // ヒットしたオブジェクトは削除
-            Destroy(hit.gameObject);
+            Destroy(other.gameObject);
             //
+        }
+    }
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == "Ground") isGrounded = false;
+    }
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+            // moveDirection.y = 0;
         }
     }
 }
