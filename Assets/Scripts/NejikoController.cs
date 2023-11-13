@@ -111,11 +111,13 @@ public class NejikoController : MonoBehaviour
     {
         if (IsStun()) return;
 
+        // 地面に足が着いたら
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;
             moveDirection.y = 0;
         }
+        // ロボに当たったら
         if (other.gameObject.tag == "Robo")
         {
             // ライフを減らして気絶状態に移行
@@ -131,16 +133,12 @@ public class NejikoController : MonoBehaviour
     }
     void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-        }
+        // 地面から足が離れた時
+        if (other.gameObject.tag == "Ground") isGrounded = false;
     }
     void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-        }
+        // 地面に足が着いてる間
+        if (other.gameObject.tag == "Ground") isGrounded = true;
     }
 }
