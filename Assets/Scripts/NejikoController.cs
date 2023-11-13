@@ -53,6 +53,42 @@ public class NejikoController : MonoBehaviour
         if (Input.GetKeyDown("right")) MoveToRight();
         if (Input.GetKeyDown("space")) Jump();
 
+        // if (IsStun())
+        // {
+        //     // 動きを止め気絶状態からの復帰カウントを進める
+        //     moveDirection.x = 0.0f;
+        //     moveDirection.z = 0.0f;
+        //     recoverTime -= Time.deltaTime;
+        // }
+        // else
+        // {
+        //     // 徐々に加速しZ方向に常に前進させる
+        //     float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
+        //     moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
+
+        //     // X方向は目標のポジションまでの差分の割合で速度を計算
+        //     float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
+        //     moveDirection.x = ratioX * speedX;
+        // }
+        // // 重力分の力を毎フレーム追加
+        // moveDirection.y -= gravity * Time.deltaTime;
+
+        // // 移動実行
+        // // Vector3 globalDirection = transform.TransformDirection(moveDirection);
+        // // moveDirection = globalDirection;
+        // // controller.Move(globalDirection * Time.deltaTime);
+        // // rd.velocity = moveDirection;
+
+
+        // // 移動後接地してたらY方向の速度はリセットする
+        // // if (controller.isGrounded) moveDirection.y = 0;
+        // if (isGrounded) moveDirection.y = 0;
+        // // 
+        // // 速度が0以上なら走っているフラグをtrueにする
+        // animator.SetBool("run", moveDirection.z > 0.0f);
+    }
+    private void FixedUpdate()
+    {
         if (IsStun())
         {
             // 動きを止め気絶状態からの復帰カウントを進める
@@ -74,23 +110,18 @@ public class NejikoController : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         // 移動実行
-        // Vector3 globalDirection = transform.TransformDirection(moveDirection);
+        Vector3 globalDirection = transform.TransformDirection(moveDirection);
         // moveDirection = globalDirection;
-        // controller.Move(globalDirection * Time.deltaTime);
         // rd.velocity = moveDirection;
+        rd.velocity = globalDirection;
 
 
         // 移動後接地してたらY方向の速度はリセットする
         // if (controller.isGrounded) moveDirection.y = 0;
         if (isGrounded) moveDirection.y = 0;
-
+        // 
         // 速度が0以上なら走っているフラグをtrueにする
         animator.SetBool("run", moveDirection.z > 0.0f);
-    }
-    private void FixedUpdate()
-    {
-        rd.velocity = moveDirection;
-        // rd.AddForce(transform.forward * speedZ, ForceMode.Acceleration);
     }
 
     // 左のレーンに移動を開始
@@ -115,8 +146,8 @@ public class NejikoController : MonoBehaviour
         if (isGrounded)
         {
             moveDirection.y = speedJump;
-            // rd.AddForce(transform.up * speedJump, ForceMode.VelocityChange);
-            isGrounded = false;
+            // isGrounded = false;
+            // rd.AddForce(transform.up * 20, ForceMode.Impulse);
 
             // ジャンプトリガーを設定
             animator.SetTrigger("jump");
@@ -149,7 +180,6 @@ public class NejikoController : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            // rd.useGravity = false;
         }
         if (other.gameObject.tag == "Robo")
         {
