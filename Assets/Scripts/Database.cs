@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class Database : MonoBehaviour
 {
     public User[] users;
+    public GameObject scorePrefab;
 
     private void Start()
     {
@@ -57,10 +59,22 @@ public class Database : MonoBehaviour
                 users = result.result;
             }
         }
+        for (int i = 0; i < users.Length; i++)
+        {
+            User user = users[i];
+            // 画面表示用のテキストプレハブから生成
+            GameObject score = Instantiate(scorePrefab, this.transform);
+            // score.transform.SetParent(this.transform);
+
+            // Textコンポーネント取得、ランキングのスコア表示
+            Text scoreText = score.GetComponent<Text>();
+            scoreText.text = $"{i + 1:000}位 {user.name}:{user.score}m";
+        }
     }
+
 }
 
-[Serializable]
+// [Serializable]
 public class Ranking
 {
     public User[] result;
