@@ -14,6 +14,7 @@ public class Database : MonoBehaviour
         StartCoroutine(GetRanking());
     }
 
+    // データベースにスコアを送信
     IEnumerator SendScore(string name, int score)
     {
         string url = "http://localhost/nejikorun/sendscore.py";
@@ -37,6 +38,8 @@ public class Database : MonoBehaviour
         }
 
     }
+
+    // データベースからランキング取得
     IEnumerator GetRanking()
     {
         string url = "http://localhost/nejikorun/getranking.py";
@@ -59,6 +62,8 @@ public class Database : MonoBehaviour
                 users = result.result;
             }
         }
+
+        // 取得したランキング情報を表示
         for (int i = 0; i < users.Length; i++)
         {
             User user = users[i];

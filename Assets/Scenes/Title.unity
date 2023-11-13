@@ -220,7 +220,7 @@ RectTransform:
   - {fileID: 142706423}
   - {fileID: 1925174561}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 80907845}
   - component: {fileID: 80907844}
   m_Layer: 5
-  m_Name: SendScoreCanvas
+  m_Name: RankingCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -572,7 +572,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143141115}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431212775}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: SendScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &143141115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,8 +813,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highScoreText: {fileID: 142706424}
-  canvas: {fileID: 0}
-  sendRankingCanvas: {fileID: 0}
+  canvas: {fileID: 7707799}
+  sendRankingCanvas: {fileID: 80907843}
 --- !u!4 &431212776
 Transform:
   m_ObjectHideFlags: 0
@@ -816,7 +828,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &477552947
 GameObject:
@@ -1004,7 +1016,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &542813735
 GameObject:
@@ -1868,7 +1880,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1925174563}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 431212775}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: ActiveRankingCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1925174563
 MonoBehaviour:
   m_ObjectHideFlags: 0

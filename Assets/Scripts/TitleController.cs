@@ -14,9 +14,18 @@ public class TitleController : MonoBehaviour
     {
         // ハイスコアを表示
         highScoreText.text = "HighScore : " + PlayerPrefs.GetInt("HighScore") + "m";
+        sendRankingCanvas.SetActive(false);
     }
     public void OnStartButtonClicked()
     {
         SceneManager.LoadScene("Main");
+    }
+    public void ActiveRankingCanvas()
+    {
+        sendRankingCanvas.SetActive(true);
+    }
+    public void SendScore()
+    {
+        sendRankingCanvas.SetActive(false);
     }
 }
