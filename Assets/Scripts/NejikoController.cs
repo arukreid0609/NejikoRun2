@@ -57,7 +57,7 @@ public class NejikoController : MonoBehaviour
             // 動きを止め気絶状態からの復帰カウントを進める
             moveDirection.x = 0.0f;
             moveDirection.z = 0.0f;
-            recoverTime -= Time.deltaTime;
+            recoverTime -= Time.fixedDeltaTime;
         }
         else
         {
@@ -79,7 +79,6 @@ public class NejikoController : MonoBehaviour
 
         // 速度が0以上なら走っているフラグをtrueにする
         animator.SetBool("run", moveDirection.z > 0.0f);
-        Debug.Log(isGrounded);
     }
 
     // 左のレーンに移動を開始
@@ -88,12 +87,12 @@ public class NejikoController : MonoBehaviour
         if (IsStun()) return;
         if (isGrounded && targetLane > MinLane) targetLane--;
     }
+
     // 右のレーンに移動を開始
     public void MoveToRight()
     {
         if (IsStun()) return;
         if (isGrounded && targetLane < MaxLane) targetLane++;
-
     }
 
     public void Jump()
@@ -102,7 +101,6 @@ public class NejikoController : MonoBehaviour
         if (isGrounded)
         {
             moveDirection.y = speedJump;
-            isGrounded = false;
 
             // ジャンプトリガーを設定
             animator.SetTrigger("jump");
@@ -127,7 +125,7 @@ public class NejikoController : MonoBehaviour
             // ダメージトリガーを設定
             animator.SetTrigger("damage");
 
-            // ヒットしたオブジェクトは削除
+            // 衝突したオブジェクトは削除
             Destroy(other.gameObject);
         }
     }
