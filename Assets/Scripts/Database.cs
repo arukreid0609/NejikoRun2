@@ -8,21 +8,26 @@ public class Database : MonoBehaviour
 {
     public User[] users;
     public GameObject scorePrefab;
+    public InputField input;
+    public Transform scorePanel;
 
-    private void Start()
+    public void GetRankingStart()
     {
         StartCoroutine(GetRanking());
     }
 
     // データベースにスコアを送信
-    IEnumerator SendScore(string name, int score)
+    public IEnumerator SendScore()
     {
-        string url = "http://localhost/nejikorun/sendscore.py";
+        // リクエスト先URL
+        string url = "http://192.168.12.6/nejikorun/sendscore.py";
+
+        // リクエストパラメータを追加
         WWWForm form = new WWWForm();
+        form.AddField("name", input.text);
+        form.AddField("score", PlayerPrefs.GetInt("HighScore"));
 
-        form.AddField("name", name);
-        form.AddField("score", score);
-
+        // Postリクエスト送信
         using (UnityWebRequest uwr = UnityWebRequest.Post(url, form))
         {
             yield return uwr.SendWebRequest();
@@ -32,20 +37,17 @@ public class Database : MonoBehaviour
                 case UnityWebRequest.Result.ProtocolError:
                     Debug.LogError("Error: " + uwr.error);
                     break;
-                default:
-                    string responseText = uwr.downloadHandler.text;
-                    Debug.Log(responseText);
-                    break;
             }
         }
-
     }
 
     // データベースからランキング取得
-    IEnumerator GetRanking()
+    public IEnumerator GetRanking()
     {
-        string url = "http://localhost/nejikorun/getranking.py";
+        // リクエスト先URL
+        string url = "http://192.168.12.6/nejikorun/getranking.py";
 
+        // GETリクエスト送信
         using (UnityWebRequest uwr = UnityWebRequest.Get(url))
         {
             yield return uwr.SendWebRequest();
@@ -56,19 +58,25 @@ public class Database : MonoBehaviour
                     Debug.LogError("Error: " + uwr.error);
                     break;
                 default:
+                    // レスポンス内容のJSONからRankingクラスのインスタンスに変換
                     string responseText = uwr.downloadHandler.text;
-                    Ranking result = JsonUtility.FromJson<Ranking>(responseText);
-                    users = result.result;
+                    Ranking ranking = JsonUtility.FromJson<Ranking>(responseText);
+                    users = ranking.result;
                     break;
             }
         }
 
-        // 取得したランキング情報を表示
+        ShowRanking();
+    }
+    // 取得したランキング情報を表示
+    void ShowRanking()
+    {
         for (int i = 0; i < users.Length; i++)
         {
+            // ランキングのユーザーデータを1件取得
             User user = users[i];
             // 画面表示用のテキストプレハブから生成
-            GameObject score = Instantiate(scorePrefab, this.transform);
+            GameObject score = Instantiate(scorePrefab, scorePanel.transform);
 
             // Textコンポーネント取得、ランキングのスコア表示
             Text scoreText = score.GetComponent<Text>();
@@ -78,16 +86,16 @@ public class Database : MonoBehaviour
 
 
     // ランキングのスコア一覧削除
-    public void DeleteScores(Transform parent)
+    public void DeleteScores(Transform panel)
     {
-        foreach (Transform child in parent)
+        foreach (Transform child in panel)
         {
             Destroy(child.gameObject);
         }
     }
 }
 
-// [Serializable]
+// データ格納用クラス
 public class Ranking
 {
     public User[] result;
@@ -99,5 +107,4 @@ public class User
     public int id;
     public string name;
     public int score;
-
 }
