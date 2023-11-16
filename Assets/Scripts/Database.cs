@@ -83,16 +83,6 @@ public class Database : MonoBehaviour
             scoreText.text = $"{i + 1:000}位 {user.name}:{user.score}m";
         }
     }
-
-
-    // ランキングのスコア一覧削除
-    public void DeleteScores(Transform panel)
-    {
-        foreach (Transform child in panel)
-        {
-            Destroy(child.gameObject);
-        }
-    }
 }
 
 // データ格納用クラス
