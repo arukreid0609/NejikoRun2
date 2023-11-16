@@ -883,6 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   users: []
+  scorePrefab: {fileID: 0}
 --- !u!4 &676241555
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,6 +1725,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 114390, guid: 16de06a814a1d403fbe161e9851bc37b, type: 3}
   m_PrefabInstance: {fileID: 1164773363}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1171381442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 118570, guid: 16de06a814a1d403fbe161e9851bc37b, type: 3}
+  m_PrefabInstance: {fileID: 1164773363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1171381447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171381442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09aa8d4685315a4090546148b16eeea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1243382694
 GameObject:
   m_ObjectHideFlags: 0
