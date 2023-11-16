@@ -45,12 +45,8 @@ public class Database : MonoBehaviour
     IEnumerator GetRanking()
     {
         string url = "http://localhost/nejikorun/getranking.py";
-        WWWForm form = new WWWForm();
 
-        form.AddField("name", "nejiko");
-        form.AddField("record", 9999);
-
-        using (UnityWebRequest uwr = UnityWebRequest.Post(url, form))
+        using (UnityWebRequest uwr = UnityWebRequest.Get(url))
         {
             yield return uwr.SendWebRequest();
             switch (uwr.result)
@@ -79,7 +75,10 @@ public class Database : MonoBehaviour
             scoreText.text = $"{i + 1:000}位 {user.name}:{user.score}m";
         }
     }
-    public void DeleteChildren(Transform parent)
+
+
+    // ランキングのスコア一覧削除
+    public void DeleteScores(Transform parent)
     {
         foreach (Transform child in parent)
         {
