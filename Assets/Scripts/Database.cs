@@ -26,14 +26,16 @@ public class Database : MonoBehaviour
         using (UnityWebRequest uwr = UnityWebRequest.Post(url, form))
         {
             yield return uwr.SendWebRequest();
-            if (uwr.isNetworkError || uwr.isHttpError)
+            switch (uwr.result)
             {
-                Debug.LogError("Error: " + uwr.error);
-            }
-            else
-            {
-                string responseText = uwr.downloadHandler.text;
-                Debug.Log(responseText);
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("Error: " + uwr.error);
+                    break;
+                default:
+                    string responseText = uwr.downloadHandler.text;
+                    Debug.Log(responseText);
+                    break;
             }
         }
 
@@ -51,15 +53,17 @@ public class Database : MonoBehaviour
         using (UnityWebRequest uwr = UnityWebRequest.Post(url, form))
         {
             yield return uwr.SendWebRequest();
-            if (uwr.isNetworkError || uwr.isHttpError)
+            switch (uwr.result)
             {
-                Debug.LogError("Error: " + uwr.error);
-            }
-            else
-            {
-                string responseText = uwr.downloadHandler.text;
-                Ranking result = JsonUtility.FromJson<Ranking>(responseText);
-                users = result.result;
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError("Error: " + uwr.error);
+                    break;
+                default:
+                    string responseText = uwr.downloadHandler.text;
+                    Ranking result = JsonUtility.FromJson<Ranking>(responseText);
+                    users = result.result;
+                    break;
             }
         }
 
@@ -69,14 +73,19 @@ public class Database : MonoBehaviour
             User user = users[i];
             // 画面表示用のテキストプレハブから生成
             GameObject score = Instantiate(scorePrefab, this.transform);
-            // score.transform.SetParent(this.transform);
 
             // Textコンポーネント取得、ランキングのスコア表示
             Text scoreText = score.GetComponent<Text>();
             scoreText.text = $"{i + 1:000}位 {user.name}:{user.score}m";
         }
     }
-
+    public void DeleteChildren(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }
 
 // [Serializable]
