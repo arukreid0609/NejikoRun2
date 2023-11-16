@@ -902,7 +902,7 @@ GameObject:
   - component: {fileID: 477552950}
   - component: {fileID: 477552949}
   m_Layer: 5
-  m_Name: RankingSortPanel
+  m_Name: ScorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
