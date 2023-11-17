@@ -20,7 +20,8 @@ public class Database : MonoBehaviour
     public IEnumerator SendScore()
     {
         // リクエスト先URL
-        string url = "http://192.168.12.6/nejikorun/sendscore.py";
+        // string url = "http://192.168.12.6/nejikorun/sendscore.py";
+        string url = "http://localhost/nejikorun/sendscore.py";
 
         // リクエストパラメータを追加
         WWWForm form = new WWWForm();
@@ -45,7 +46,8 @@ public class Database : MonoBehaviour
     public IEnumerator GetRanking()
     {
         // リクエスト先URL
-        string url = "http://192.168.12.6/nejikorun/getranking.py";
+        // string url = "http://192.168.12.6/nejikorun/getranking.py";
+        string url = "http://localhost/nejikorun/getranking.py";
 
         // GETリクエスト送信
         using (UnityWebRequest uwr = UnityWebRequest.Get(url))
