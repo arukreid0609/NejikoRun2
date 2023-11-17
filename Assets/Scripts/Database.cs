@@ -8,16 +8,10 @@ public class Database : MonoBehaviour
 {
     public User[] users;
     public GameObject scorePrefab;
-    public InputField input;
     public Transform scorePanel;
 
-    public void GetRankingStart()
-    {
-        StartCoroutine(GetRanking());
-    }
-
     // データベースにスコアを送信
-    public IEnumerator SendScore()
+    public IEnumerator SendScore(InputField input)
     {
         // リクエスト先URL
         // string url = "http://192.168.12.6/nejikorun/sendscore.py";

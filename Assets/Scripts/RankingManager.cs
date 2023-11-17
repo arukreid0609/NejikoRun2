@@ -33,7 +33,7 @@ public class RankingManager : MonoBehaviour
     public void SendScore()
     {
         sendRankingCanvas.SetActive(false);
-        StartCoroutine(database.SendScore());
+        StartCoroutine(database.SendScore(input));
     }
 
     // ランキングのスコア一覧削除
