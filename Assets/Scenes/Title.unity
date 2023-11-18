@@ -455,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   users: []
   scorePrefab: {fileID: 3016989748337797507, guid: 4a9de91b1ed90574eb4c5a59ae38a0c9, type: 3}
-  scorePanel: {fileID: 1725831624}
+  content: {fileID: 1725831624}
 --- !u!1 &142706422
 GameObject:
   m_ObjectHideFlags: 0

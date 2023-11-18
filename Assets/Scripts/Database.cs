@@ -8,7 +8,7 @@ public class Database : MonoBehaviour
 {
     public User[] users;
     public GameObject scorePrefab;
-    public Transform scorePanel;
+    public Transform content;
 
     // データベースにスコアを送信
     public IEnumerator SendScore(InputField input)
@@ -71,7 +71,7 @@ public class Database : MonoBehaviour
             // ランキングのユーザーデータを1件取得
             User user = users[i];
             // 画面表示用のテキストプレハブから生成
-            GameObject score = Instantiate(scorePrefab, scorePanel.transform);
+            GameObject score = Instantiate(scorePrefab, content);
 
             // Textコンポーネント取得、ランキングのスコア表示
             Text scoreText = score.GetComponent<Text>();
