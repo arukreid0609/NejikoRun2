@@ -14,7 +14,6 @@ public class Database : MonoBehaviour
     public IEnumerator SendScore(InputField input)
     {
         // リクエスト先URL
-        // string url = "http://192.168.12.6/nejikorun/sendscore.py";
         string url = "http://localhost/nejikorun/sendscore.py";
 
         // リクエストパラメータを追加
@@ -40,7 +39,6 @@ public class Database : MonoBehaviour
     public IEnumerator GetRanking()
     {
         // リクエスト先URL
-        // string url = "http://192.168.12.6/nejikorun/getranking.py";
         string url = "http://localhost/nejikorun/getranking.py";
 
         // GETリクエスト送信
@@ -64,6 +62,7 @@ public class Database : MonoBehaviour
 
         ShowRanking();
     }
+
     // 取得したランキング情報を表示
     void ShowRanking()
     {

@@ -6,27 +6,22 @@ using UnityEngine.UI;
 public class RankingManager : MonoBehaviour
 {
     public GameObject sendRankingCanvas;
-    public Database database;
-    public GameObject scorePrefab;
-    public InputField input;
-    public Transform scorePanel;
+    public Transform content;
     public Text scoreText;
+    public InputField input;
+    public Database database;
     public void Start()
     {
         sendRankingCanvas.SetActive(false);
+        scoreText.text = $"Score:{PlayerPrefs.GetInt("HighScore")}m";
+        StartCoroutine(database.GetRanking());
     }
 
     // ランキング用のキャンバス有効化
-    public void ActiveRankingCanvas()
+    public void ActiveSwitchCanvas()
     {
-        sendRankingCanvas.SetActive(true);
-        scoreText.text = $"Score:{PlayerPrefs.GetInt("HighScore")}m";
-    }
-
-    // ランキング取得
-    public void GetRanking()
-    {
-        StartCoroutine(database.GetRanking());
+        bool active = sendRankingCanvas.activeSelf;
+        sendRankingCanvas.SetActive(!active);
     }
 
     // スコア送信
@@ -37,9 +32,9 @@ public class RankingManager : MonoBehaviour
     }
 
     // ランキングのスコア一覧削除
-    public void DeleteScores(Transform rankingSortPanel)
+    public void DeleteScores()
     {
-        foreach (Transform child in rankingSortPanel)
+        foreach (Transform child in content)
         {
             Destroy(child.gameObject);
         }
