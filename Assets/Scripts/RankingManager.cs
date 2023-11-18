@@ -10,14 +10,15 @@ public class RankingManager : MonoBehaviour
     public Text scoreText;
     public InputField input;
     public Database database;
+
     public void Start()
     {
+        // ランキングキャンバスの非表示、ハイスコアの表示設定
         sendRankingCanvas.SetActive(false);
         scoreText.text = $"Score:{PlayerPrefs.GetInt("HighScore")}m";
-        StartCoroutine(database.GetRanking());
     }
 
-    // ランキング用のキャンバス有効化
+    // ランキング用のキャンバス有効、無効の切替
     public void ActiveSwitchCanvas()
     {
         bool active = sendRankingCanvas.activeSelf;
@@ -29,6 +30,12 @@ public class RankingManager : MonoBehaviour
     {
         sendRankingCanvas.SetActive(false);
         StartCoroutine(database.SendScore(input));
+    }
+
+    // ランキングの取得
+    public void GetRanking()
+    {
+        StartCoroutine(database.GetRanking());
     }
 
     // ランキングのスコア一覧削除
